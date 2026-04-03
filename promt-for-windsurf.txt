@@ -1,0 +1,241 @@
+You are a senior Java backend architect and engineer.
+
+Your task is to generate a **fully runnable, production-grade multi-module project** implementing a sports betting settlement system using event-driven architecture.
+
+# 🎯 Goal
+
+Build a **multi-service backend system** that simulates:
+
+* Publishing sports event outcomes
+* Matching bets
+* Triggering settlements
+
+The system MUST use:
+
+* Kafka (event streaming)
+* RocketMQ (settlement messaging)
+* Outbox Pattern (mandatory)
+
+---
+
+# 🧱 Architecture Requirements
+
+## Services (separate Spring Boot apps)
+
+1. **event-api-service**
+
+   * REST API to accept event outcomes
+   * Writes to DB using Outbox Pattern
+   * DOES NOT publish directly to Kafka
+
+2. **settlement-service**
+
+   * Kafka consumer (event-outcomes topic)
+   * Matches bets from DB
+   * Writes settlement events to Outbox
+   * Publishes to RocketMQ via outbox relay
+
+3. **common-lib**
+
+   * Shared DTOs
+
+---
+
+# 📦 Technical Stack (MANDATORY)
+
+* Java 21
+* Spring Boot 3.x
+* Maven multi-module project
+* Google Java Format (enforced)
+* JUnit 5 (Jupiter)
+* AssertJ
+* Testcontainers (Kafka + RocketMQ)
+* H2 in-memory database
+* Spring Data JPA
+* Kafka (Spring Kafka)
+* RocketMQ (Spring Boot starter)
+* Jacoco (code coverage)
+* Docker + Docker Compose
+
+---
+
+# 🐳 Docker Requirements
+
+Provide a **docker-compose.yml** that runs:
+
+* Zookeeper
+* Kafka
+* RocketMQ NameServer
+* RocketMQ Broker
+
+Expose necessary ports.
+
+---
+
+# 📚 Functional Requirements
+
+## 1. API Endpoint
+
+POST /events/outcome
+
+Payload:
+{
+"eventId": "E1",
+"eventName": "Match",
+"winnerId": "T1"
+}
+
+Behavior:
+
+* Persist event into OUTBOX table
+* Return HTTP 202
+
+---
+
+## 2. Outbox Pattern (STRICT)
+
+### event-api-service:
+
+* Table: outbox_events
+* Scheduled job publishes to Kafka topic: event-outcomes
+* Marks records as published
+
+### settlement-service:
+
+* Kafka consumer reads event-outcomes
+* Matches bets by eventId
+* Filters winning bets
+* Writes to settlement_outbox
+* Scheduled job publishes to RocketMQ topic: bet-settlements
+
+---
+
+## 3. Bet Model
+
+Fields:
+
+* betId
+* userId
+* eventId
+* eventMarketId
+* eventWinnerId
+* betAmount
+
+---
+
+## 4. Matching Logic
+
+Winning condition:
+bet.eventWinnerId == event.winnerId
+
+---
+
+# 🗄️ Database
+
+* Use H2 (in-memory)
+* Auto-create schema
+* Include sample data loader for bets
+
+---
+
+# 🧪 Testing Requirements
+
+## Unit Tests
+
+* Service layer
+* Use Mockito + AssertJ
+
+## Spring Boot Tests
+
+* Controller tests using MockMvc
+
+## Integration Tests
+
+* Use Testcontainers:
+
+  * Kafka container
+  * RocketMQ container (GenericContainer)
+* Full flow:
+
+  * Send event
+  * Verify settlement triggered
+
+---
+
+# 📊 Code Coverage
+
+* Configure JaCoCo Maven plugin
+* Generate report during `mvn verify`
+
+---
+
+# 🧹 Code Quality
+
+* Apply Google Java Format
+* Clean architecture (layered)
+* Proper package structure:
+
+  * controller
+  * service
+  * repository
+  * domain
+  * config
+  * messaging
+
+---
+
+# ⚙️ Non-Functional Requirements
+
+* Idempotency handling (avoid duplicate settlements)
+* Logging (Slf4j)
+* Exception handling
+* Configurable topics via application.yml
+
+---
+
+# 📁 Expected Output Structure
+
+sports-betting-system/
+├── docker-compose.yml
+├── pom.xml (parent)
+├── common-lib/
+├── event-api-service/
+├── settlement-service/
+
+Each service must:
+
+* be independently runnable
+* include Dockerfile
+
+---
+
+# 🚀 Run Instructions (must be included)
+
+* docker-compose up
+* mvn clean install
+* how to run services
+* example curl request
+
+---
+
+# ❗ Important Constraints
+
+* DO NOT skip Outbox Pattern
+* DO NOT publish directly from controller to Kafka
+* MUST be runnable without manual fixes
+* MUST compile successfully
+* MUST include tests
+
+---
+
+# 🎯 Deliverable
+
+Generate:
+
+* Full source code
+* All Maven files
+* Dockerfiles
+* docker-compose.yml
+* README.md with instructions
+
+Ensure everything is complete and consistent.

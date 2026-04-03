@@ -1,0 +1,5 @@
+com\sportsbetting\common\dto\Bet.class
+com\sportsbetting\common\constants\Topics.class
+com\sportsbetting\common\dto\SettlementEvent.class
+com\sportsbetting\common\enums\SettlementStatus.class
+com\sportsbetting\common\dto\EventOutcome.class

@@ -1,0 +1,8 @@
+com\sportsbetting\eventapi\domain\OutboxEvent.class
+com\sportsbetting\eventapi\messaging\OutboxPublisher.class
+com\sportsbetting\eventapi\domain\OutboxStatus.class
+com\sportsbetting\eventapi\controller\EventController.class
+com\sportsbetting\eventapi\service\EventService.class
+com\sportsbetting\eventapi\config\KafkaConfig.class
+com\sportsbetting\eventapi\EventApiServiceApplication.class
+com\sportsbetting\eventapi\repository\OutboxEventRepository.class

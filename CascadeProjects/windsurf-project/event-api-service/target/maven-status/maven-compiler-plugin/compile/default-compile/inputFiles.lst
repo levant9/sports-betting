@@ -1,0 +1,8 @@
+C:\Users\levan\IdeaProjects\sports-betting\CascadeProjects\windsurf-project\event-api-service\src\main\java\com\sportsbetting\eventapi\config\KafkaConfig.java
+C:\Users\levan\IdeaProjects\sports-betting\CascadeProjects\windsurf-project\event-api-service\src\main\java\com\sportsbetting\eventapi\controller\EventController.java
+C:\Users\levan\IdeaProjects\sports-betting\CascadeProjects\windsurf-project\event-api-service\src\main\java\com\sportsbetting\eventapi\domain\OutboxEvent.java
+C:\Users\levan\IdeaProjects\sports-betting\CascadeProjects\windsurf-project\event-api-service\src\main\java\com\sportsbetting\eventapi\domain\OutboxStatus.java
+C:\Users\levan\IdeaProjects\sports-betting\CascadeProjects\windsurf-project\event-api-service\src\main\java\com\sportsbetting\eventapi\EventApiServiceApplication.java
+C:\Users\levan\IdeaProjects\sports-betting\CascadeProjects\windsurf-project\event-api-service\src\main\java\com\sportsbetting\eventapi\messaging\OutboxPublisher.java
+C:\Users\levan\IdeaProjects\sports-betting\CascadeProjects\windsurf-project\event-api-service\src\main\java\com\sportsbetting\eventapi\repository\OutboxEventRepository.java
+C:\Users\levan\IdeaProjects\sports-betting\CascadeProjects\windsurf-project\event-api-service\src\main\java\com\sportsbetting\eventapi\service\EventService.java
