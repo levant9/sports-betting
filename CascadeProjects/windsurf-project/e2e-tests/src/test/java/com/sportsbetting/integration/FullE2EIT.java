@@ -35,8 +35,7 @@ import org.testcontainers.utility.DockerImageName;
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.NONE,
-    classes = TestApplication.class
-)
+    classes = TestApplication.class)
 @EmbeddedKafka(
     partitions = 1,
     brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"})
